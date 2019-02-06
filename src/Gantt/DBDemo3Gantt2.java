@@ -1676,7 +1676,7 @@ public class DBDemo3Gantt2 {
     	HashMap<String, SubjectTSubjectNObject> myhashmap= new HashMap<String, SubjectTSubjectNObject>() ; 
 
     	try {
-    		File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\GanttFiles\\gantt_meth_votesBrace.txt");
+    		File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\GanttFiles\\gantt_meth_votestrianglebracket.txt");
     		FileReader fileReader = new FileReader(file);
     		BufferedReader bufferedReader = new BufferedReader(fileReader);
     		StringBuffer stringBuffer = new StringBuffer();
