@@ -102,7 +102,6 @@ public class Clazz {
 	public  HashMap<Integer, Clazz> ReadClassesRepresentations(Connection conn) throws SQLException {
 		// Rule: if method A calls method B and method A implements requirement X, then I can just assume that method B implements requirement X as well 
 		// Retrieving the calleeid
-		DatabaseReading2 db = new DatabaseReading2(); 
 	
 		//CLASSESHASHMAP
 		String rowcount = null; 

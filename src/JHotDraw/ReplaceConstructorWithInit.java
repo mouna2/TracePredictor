@@ -1,10 +1,14 @@
-package Chess;
+package JHotDraw;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,12 +26,12 @@ import java.util.regex.Pattern;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 
-public class AddGold2ColumnTTRACESCLASSES_NEW {
+public class ReplaceConstructorWithInit {
 	/** The name of the MySQL account to use (or empty for anonymous) */
-	static String userName = "root";
+	private final String userName = "root";
 	
 	/** The password for the MySQL account (or empty for anonymous) */
-	static String password = "root";
+	private final String password = "root";
 
 	/** The name of the computer running MySQL */
 	private final String serverName = "localhost";
@@ -44,12 +48,12 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
-		connectionProps.put("root", userName);
-		connectionProps.put("123456", password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess","root","123456");
+		connectionProps.put("root", this.userName);
+		connectionProps.put("123456", this.password);
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasejhotdraw","root","123456");
 
 		return conn;
 	}
@@ -121,35 +125,34 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 
 		// TODO Auto-generated method stub
 		Connection conn = null;
-		
-		conn = getConnection();
-		Statement st = conn.createStatement();
-		Statement st2 = conn.createStatement();
-		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\Chess\\ChessFiles\\TracesClassesNEW.txt");
+		DBDemo3JHotDraw2 DatabaseReading = new DBDemo3JHotDraw2();
+		conn = DatabaseReading.getConnection();
 
-		st.executeUpdate("ALTER TABLE `tracesclasses` DROP COLUMN goldfinal");
-		st.executeUpdate("ALTER TABLE `tracesclasses` ADD goldfinal LONGTEXT"); 
+		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\jhotdrawnew_meth_votes.txt");
+
+		List<String> NewlineList= new ArrayList<String>(); 
 		
 		
 		 BufferedReader bufferedReader = new BufferedReader(fileReader);
-	        HashMap<String,  String> ReqClassHashMap= new HashMap<String,  String> (); 
 	        String line = null;
 	        line = bufferedReader.readLine(); 
-	        String[] requirements = line.split(","); 
 	        while((line = bufferedReader.readLine()) != null) {
 //	            System.out.println(line);
-	            String[] splitted = line.split("\\,", -1);
-	            
-	            for(int i=1; i<splitted.length; i++) {
-	            	if(splitted[i].equals("x")) {
-	            		ReqClassHashMap.put(i+"-"+splitted[0], "T"); 
-	            	}else if(splitted[i].equals("")) {
-	            		ReqClassHashMap.put(i+"-"+splitted[0], "N"); 
-	            	}
+	        	 String[] splitted = line.split("\\,", -1);
+	        	 String newline=null; 
+	          if(splitted[1].equals(splitted[2])) {
+	        	   newline=splitted[0]+"."+splitted[1]+"."+"-init-"; 
+	        	  
+	            }else {
+	            	  newline=splitted[0]+"."+splitted[1]+"."+splitted[2]; 
 	            }
+	          for(int i=3; i<splitted.length; i++) {
+        		  newline=newline+","+splitted[i]; 
+        	  }
 //	            System.out.println(line);
+	        NewlineList.add(newline); 
 	        }   
-
+	        
 	        // Always close files.
 	        bufferedReader.close();         
 
@@ -157,24 +160,20 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 		
 	
 		
-		int counter2=0; 
-		
-		
-		for (Entry <String,  String> entry : ReqClassHashMap.entrySet()) {
-		    String key = entry.getKey(); 
-		    String[] keys = key.split("-"); 
-		   String ReqID=keys[0]; 
-		   String ClassName=keys[1]; 
-		     List<String> List= new ArrayList<String>(); 
-		 	st.executeUpdate("UPDATE `tracesclasses` SET `goldfinal` ='"+ entry.getValue().trim() +"'WHERE requirementid='"+ReqID+"' AND classname='"+ClassName+"'"); 
-//			System.out.println(ReqClass);
-			System.out.println("counter "+counter2);
-			counter2++; 
+	  
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\JHotDrawMethodsFormatted.txt")); 
 
-		}
-		
-	 	st.executeUpdate("UPDATE `tracesclasses` SET `goldfinal` ='"+ "E" +"'WHERE goldfinal is null"); 
+            for(String myline: NewlineList) {
+            	
+                writer.write(myline);
+                writer.newLine();
+                System.out.println(myline);
+            }
+            writer.close();
+        }
+   
+	  
 
 		
 	}
-}
+

@@ -1,4 +1,4 @@
-package Chess;
+package JHotDraw;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,12 +22,12 @@ import java.util.regex.Pattern;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 
-public class AddGold2ColumnTTRACESCLASSES_NEW {
+public class AddgoldfinalColumnTTRACESCLASSES_NEW {
 	/** The name of the MySQL account to use (or empty for anonymous) */
-	static String userName = "root";
+	private final String userName = "root";
 	
 	/** The password for the MySQL account (or empty for anonymous) */
-	static String password = "root";
+	private final String password = "root";
 
 	/** The name of the computer running MySQL */
 	private final String serverName = "localhost";
@@ -44,12 +44,12 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
-		connectionProps.put("root", userName);
-		connectionProps.put("123456", password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess","root","123456");
+		connectionProps.put("root", this.userName);
+		connectionProps.put("123456", this.password);
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasejhotdraw","root","123456");
 
 		return conn;
 	}
@@ -121,11 +121,11 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 
 		// TODO Auto-generated method stub
 		Connection conn = null;
-		
-		conn = getConnection();
+		DBDemo3JHotDraw2 DatabaseReading = new DBDemo3JHotDraw2();
+		conn = DatabaseReading.getConnection();
 		Statement st = conn.createStatement();
 		Statement st2 = conn.createStatement();
-		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\Chess\\ChessFiles\\TracesClassesNEW.txt");
+		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\java\\JHotDrawFiles\\TracesClassesNEW.txt");
 
 		st.executeUpdate("ALTER TABLE `tracesclasses` DROP COLUMN goldfinal");
 		st.executeUpdate("ALTER TABLE `tracesclasses` ADD goldfinal LONGTEXT"); 
@@ -138,14 +138,19 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 	        String[] requirements = line.split(","); 
 	        while((line = bufferedReader.readLine()) != null) {
 //	            System.out.println(line);
-	            String[] splitted = line.split("\\,", -1);
+	        	 String[] splitted = line.split("\\,", -1);
 	            
 	            for(int i=1; i<splitted.length; i++) {
+	            	if(i==15) {
+	            		i=16; 
+	            	}
 	            	if(splitted[i].equals("x")) {
 	            		ReqClassHashMap.put(i+"-"+splitted[0], "T"); 
-	            	}else if(splitted[i].equals("")) {
+	            	}else {
 	            		ReqClassHashMap.put(i+"-"+splitted[0], "N"); 
 	            	}
+	            	
+	            	
 	            }
 //	            System.out.println(line);
 	        }   

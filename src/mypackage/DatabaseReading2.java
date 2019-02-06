@@ -18,10 +18,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import Chess.TracesTableChessFINALGeneticAlgorithm;
 import Tables.CallerIDName;
 import Tables.tracesmethods;
-import Tables.tracesmethodscallees;
 import mypackage.*;
 import spoon.Launcher;
 import spoon.SpoonAPI;
@@ -30,13 +28,10 @@ import spoon.reflect.factory.ClassFactory;
 
 public class DatabaseReading2 {
 	public static HashMap<Integer, String> classesHashMap = new HashMap<Integer, String>();
-	public static List<MethodTrace2> methodtraces2 = null;
 	public static List<MethodTrace> methodtraces2SubjectTSubjectN = null;
 	public static List<ClassTrace2> classestraces2 = null;
 	public static List<Interface> interfaces2 = null;
-	public static List<MethodDetails> methodlist = null;
 	public static LinkedHashMap<String, ClassTrace2> classesRequirementtraceshashmap=null; 
-	public static LinkedHashMap<String, MethodDetails> linkedmethodhashmap=null; 
 	public static HashMap<String, List<Interface>> interfacehashmapOwnerClass=null; 
 	public static HashMap<String,Interface> interfacehashmapAlreadyImpl=null; 
 	public static HashMap<String, List<ClassField2>>  ClassFieldHashMap=null; 
@@ -82,21 +77,7 @@ public class DatabaseReading2 {
 		INTERFACEHASHMAPFINAL = iNTERFACEHASHMAPFINAL;
 	}
 
-	public static List<MethodDetails> getMethodlist() {
-		return methodlist;
-	}
 
-	public static LinkedHashMap<String, MethodDetails> getLinkedmethodhashmap() {
-		return linkedmethodhashmap;
-	}
-
-	public static void setLinkedmethodhashmap(LinkedHashMap<String, MethodDetails> linkedmethodhashmap) {
-		DatabaseReading2.linkedmethodhashmap = linkedmethodhashmap;
-	}
-
-	public static void setMethodlist(List<MethodDetails> methodlist) {
-		DatabaseReading2.methodlist = methodlist;
-	}
 
 	public static HashMap<String, List<Parameter2>> getParameterhashMap() {
 		return ParameterhashMap;
@@ -190,15 +171,9 @@ public class DatabaseReading2 {
 //					+ RequirementHashMap.get(key).RequirementName + "   ");
 //		}
 		///////////////////////////////////////////////////////////////////////////////////////
-		MethodDetails methoddet2 = new MethodDetails();
-		HashMap<String, MethodDetails> methodhashmap = methoddet2.ReadClassesRepresentations2(conn);
-		List<MethodDetails> methodlist = new ArrayList<MethodDetails>(methodhashmap.values());
-		setMethodlist(methodlist);
 		
-///////////////////////////////////////////////////////////////////////////////////////
- LinkedHashMap<String, MethodDetails> linkedmethodhashmap = methoddet2.ReadClassesRepresentations2(conn);
-List<MethodDetails> methodlistlinked = new ArrayList<MethodDetails>(linkedmethodhashmap.values());
-setLinkedmethodhashmap(linkedmethodhashmap);
+		
+
 		///////////////////////////////////////////////////////////////////////////////////////
 		ClassDetails2 classdet2 = new ClassDetails2();
 		HashMap<Integer, ClassDetails2> classhashmap = classdet2.ReadClassesRepresentations(conn);
@@ -216,12 +191,7 @@ setLinkedmethodhashmap(linkedmethodhashmap);
 //		List<MethodTrace2> methodtraces = new ArrayList<MethodTrace2>(methodtracehashmap.values());
 //		setMethodtraces2(methodtraces);
 		
-		//SWITCHED TO MethodTraceSubjectTSubjectN
-		MethodTrace methodtrace2 = new MethodTrace();
-		LinkedHashMap<String, MethodTrace> methodtracehashmap = methodtrace2.ReadMethodTraces(conn, ClassMethodsHashMap, FinalMethodHashMapReqGolds);
-		List<MethodTrace> methodtraces = new ArrayList<MethodTrace>(methodtracehashmap.values());
-		setMethodtraces2SubjectTSubjectN(methodtraces);
-		setMethodtracehashmap(methodtracehashmap); 
+		
 		///////////////////////////////////////////////////////////////////////////////////////
 		
 		
@@ -537,13 +507,6 @@ setChildrenHashMap(mychildren);
 		DatabaseReading2.classesRequirementtraceshashmap = classesRequirementtraceshashmap;
 	}
 
-	public static List<MethodTrace2> getMethodtraces2() {
-		return methodtraces2;
-	}
-
-	public static void setMethodtraces2(List<MethodTrace2> methodtraces2) {
-		DatabaseReading2.methodtraces2 = methodtraces2;
-	}
 	
 	
 	public static List<MethodTrace> getMethodtraces2SubjectTSubjectN() {

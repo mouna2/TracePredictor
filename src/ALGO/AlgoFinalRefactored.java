@@ -52,7 +52,6 @@ import mypackage.ClassField2;
 import mypackage.ClassTrace2;
 import mypackage.ColumnGroup;
 import mypackage.Method;
-import mypackage.MethodDetails;
 import mypackage.MethodTrace;
 
 
@@ -104,7 +103,6 @@ public class AlgoFinalRefactored extends JFrame {
 	
 	
 	JTable table = new JTable();
-	static List<MethodDetails> methodlist = new ArrayList<MethodDetails>();
 	// File fout = new
 	// File("C:\\Users\\mouna\\new_workspace\\SpoonProcessorFinal\\TableLog.txt");
 

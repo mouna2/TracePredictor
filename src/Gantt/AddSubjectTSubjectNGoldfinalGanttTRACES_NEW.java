@@ -124,7 +124,7 @@ public class AddSubjectTSubjectNGoldfinalGanttTRACES_NEW {
 		st.executeUpdate("ALTER TABLE `traces` ADD SubjectT LONGTEXT"); 
 		st.executeUpdate("ALTER TABLE `traces` ADD SubjectN LONGTEXT");
 		try {
-			File file = new File("C:\\Users\\mouna\\new_workspace\\SpoonProcessorFinal\\java\\GanttFiles\\gantt_meth_votes.txt");
+			File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\java\\GanttFiles\\gantt_meth_votes.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			StringBuffer stringBuffer = new StringBuffer();

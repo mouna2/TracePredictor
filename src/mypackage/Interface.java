@@ -57,7 +57,6 @@ public class Interface {
 	public  HashMap<String, List<Interface>> ReadInterfacesRepresentations(Connection conn) throws SQLException {
 		// Rule: if method A calls method B and method A implements requirement X, then I can just assume that method B implements requirement X as well 
 		// Retrieving the calleeid
-		DatabaseReading2 db = new DatabaseReading2(); 
 	
 		//CLASSESHASHMAP
 		String rowcount = null; 
@@ -119,7 +118,6 @@ public class Interface {
 	public  HashMap<String, Interface> ReadInterfacesRepresentationsAlreadyImpl(Connection conn) throws SQLException {
 		// Rule: if method A calls method B and method A implements requirement X, then I can just assume that method B implements requirement X as well 
 		// Retrieving the calleeid
-		DatabaseReading2 db = new DatabaseReading2(); 
 	
 		//CLASSESHASHMAP
 		String rowcount = null; 

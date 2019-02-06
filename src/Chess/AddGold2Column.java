@@ -124,7 +124,7 @@ public class AddGold2Column {
 		st.executeUpdate("ALTER TABLE `traces` ADD goldfinal LONGTEXT"); 
 
 		try {
-			File file = new File("C:\\Users\\mouna\\new_workspace\\SpoonProcessorFinal\\java\\Chess\\ChessFiles\\TracesChess.txt");
+			File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\Chess\\ChessFiles\\TracesChess.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			StringBuffer stringBuffer = new StringBuffer();

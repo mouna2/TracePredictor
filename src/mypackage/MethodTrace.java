@@ -12,7 +12,6 @@ import java.util.List;
 import ALGO.AlgoFinalRefactored;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
-import ALGO.Methods;
 import ALGO.OwnerClassList;
 import Chess.LogInfo;
 import spoon.pattern.internal.SubstitutionRequestProvider;
@@ -27,10 +26,7 @@ public final class MethodTrace {
 	public String likelihood;
 	public String why;
 	boolean SubjectDeveloperEqualityFlag;
-	public Methods<String> SuperClassesListMethodTraces;
-	public Methods<String> InterfaceListMethodTraces;
-	public Methods<String> ChildrenListMethodTraces;
-	public Methods<String> ImplementationListMethodTraces;
+	
 
 	public boolean TraceSet; 
 

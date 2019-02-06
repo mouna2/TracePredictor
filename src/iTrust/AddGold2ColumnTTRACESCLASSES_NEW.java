@@ -124,7 +124,7 @@ public class AddGold2ColumnTTRACESCLASSES_NEW {
 		conn = getConnection();
 		Statement st = conn.createStatement();
 		Statement st2 = conn.createStatement();
-		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\SpoonProcessorFinal\\java\\iTrustFiles\\TracesClassesNEW.txt");
+		 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\java\\iTrustFiles\\TracesClassesNEW.txt");
 
 		st.executeUpdate("ALTER TABLE `tracesclasses` DROP COLUMN goldfinal");
 		st.executeUpdate("ALTER TABLE `tracesclasses` ADD goldfinal LONGTEXT"); 
