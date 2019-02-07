@@ -516,9 +516,9 @@ public class DBDemo3Chess2 {
         	
         	
         	 
-////        	/*********************************************************************************************************************************************************************************/	
-////            /*********************************************************************************************************************************************************************************/	
-////            /*********************************************************************************************************************************************************************************/
+//////        	/*********************************************************************************************************************************************************************************/	
+//////            /*********************************************************************************************************************************************************************************/	
+//////            /*********************************************************************************************************************************************************************************/
         //	BUILD SUPERCLASSES TABLE 
         	for(CtType<?> clazz : classFactory.getAll(true)) {
         		String childclassQuery = null; 
@@ -696,6 +696,7 @@ public class DBDemo3Chess2 {
     					
     					if(myinterfaceclassid!=null && !mylist.contains(interface1+implementation1) ) {
     		    			st.executeUpdate("INSERT INTO `superclasses`(`superclassid`, `superclassname`, `ownerclassid`, `childclassname`) VALUES ('"+myinterfaceclassid +"','" +myinterfacename+"','" +myclassid+"','" +myclassname+"')");
+
     		    			mylist.add(interface1+implementation1); 
     					}
         			}
@@ -713,6 +714,7 @@ public class DBDemo3Chess2 {
         		
 
         	}
+
 
 
 ////////////////////        	
@@ -1248,7 +1250,7 @@ public class DBDemo3Chess2 {
             for(CtMethod<?> method :clazz.getMethods()) {
             List<CtConstructorCall> ctNewClasses = method.getElements(new TypeFilter<CtConstructorCall>(CtConstructorCall.class));
            
-            
+            System.out.println(method.getSignature());
             List<CtReturn> returnstatement = method.getElements(new TypeFilter<CtReturn>(CtReturn.class));
 //            System.out.println("returnstatement.toString()  "+returnstatement.toString());
             for(CtReturn myret: returnstatement) {
@@ -1333,7 +1335,7 @@ public class DBDemo3Chess2 {
             	System.out.println("MYCLASS"+ clazz.getQualifiedName() +"."+method.getSignature()+"  METHOD"+ myclass.getExecutable().getSignature()+
             			"CLASSS    "+
             			myclass.getExecutable().getDeclaringType().getQualifiedName());
-            	String classtype= myclass.getType().toString(); 
+            	String classtype= myclass.getExecutable().getDeclaringType().getQualifiedName(); 
             	String FullCallerMeth=clazz.getQualifiedName()+"."+method.getSignature(); 
             	
             	String constructorName=myclass.getExecutable().getSignature(); 
@@ -1723,10 +1725,10 @@ public class DBDemo3Chess2 {
 		
 		
 		while ((line = bufferedReader.readLine()) != null) {
-			String[] splittedline = line.split(";", -1); 
+			String[] splittedline = line.split(",", -1); 
 			
-			 counter =1; 
-			for(int k=5; k<13; k++) {
+			  counter = 1; 
+			for(int k=4; k<13; k++) {
 				SubjectTSubjectNObject SubjectTSubjectNObj = new SubjectTSubjectNObject(); 
 				String methodname= splittedline[1]+"."+splittedline[2]; 
 		
