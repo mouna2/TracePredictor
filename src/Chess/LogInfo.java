@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import ALGO.AlgoFinalRefactored;
+import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.PredictionValues;
 import mypackage.ClassTrace2;
@@ -473,7 +475,7 @@ public class LogInfo {
 		String ImplementationCalleesPredictionList=toString3(ImplementationCalleePredictions); 
 		
 		
-		
+		String reqClass=this.RequirementID+"-"+this.ClassID; 
 		
 		
 		
@@ -514,7 +516,7 @@ public class LogInfo {
 		
 		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName
 				+","+ClassMethodsSize+","+ClassCallersOwnerClassesList+","+ClassCalleesOwnerClassesList
-				+","+TraceValue+","+TraceClassOldValue
+				+","+TraceValue+","+DatabaseInput.OwnerTraceHashMap.get(reqClass)
 		
 				+","+interfaceList+","+interfacePredictionList+","+ImplementationsList+","+ImplementationsPredictionList
 				+","+SuperclassList+","+SuperclassPredictionList+","+ChildrenList+","+ChildrenPredictionList		
@@ -841,7 +843,7 @@ public class LogInfo {
 			LogInfo.bwfileChess.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassOldValue"
+					+ "Gold, TraceClassValue"
 					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
 					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
 					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
@@ -858,7 +860,7 @@ public class LogInfo {
 			LogInfo.bwfile2.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassOldValue"
+					+ "Gold, TraceClassValue"
 					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
 					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
 					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
@@ -875,7 +877,7 @@ public class LogInfo {
 			LogInfo.bwfile3.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassOldValue"
+					+ "Gold, TraceClassValue"
 					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
 					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
 					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"
@@ -892,7 +894,7 @@ public class LogInfo {
 			LogInfo.bwfile4.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
 					+"ClassMethodsSize, ClassCallersOwnerClassesList, ClassCalleesOwnerClassesList, "
-					+ "Gold, TraceClassOldValue"
+					+ "Gold, TraceClassValue"
 					+"	,interfaceList,interfacePredictionList,ImplementationsList,ImplementationsPredictionList"
 					+"	,SuperclassList,SuperclassPredictionList,ChildrenList,ChildrenPredictionList"
 					+"	,interfaceCallerList,interfaceCallerPredictionList,ImplementationCalleesList,ImplementationCalleesPredictionList"

@@ -1703,7 +1703,7 @@ RequirementIDNameHashMap.put("20", "20: Performance: Strive for a short startup 
 RequirementIDNameHashMap.put("21", "21: Recoverability: periodic auto-save"); 
 
 
-
+List<String> mylist = new ArrayList<String>(); 
 HashMap<String, SubjectTSubjectNObject> myhashmap= new HashMap<String, SubjectTSubjectNObject>() ; 
 
 try {
@@ -1736,6 +1736,7 @@ try {
 			counter++; 
 			String reqMethod=RequirementID+"-"+methodname2; 
 			myhashmap.put(reqMethod,SubjectTSubjectNObj); 
+			mylist.add(reqMethod); 
 		}
 	
 	}
@@ -1743,7 +1744,7 @@ try {
 	int count=1;
 
 
-	System.out.println(stringBuffer.toString());
+//	System.out.println(stringBuffer.toString());
 } catch (IOException e) {
 	e.printStackTrace();
 }
@@ -1772,28 +1773,37 @@ String classid = mymeths.getString("classid");
 for(String key: RequirementIDNameHashMap.keySet()) {
 tracesmethods tr= new tracesmethods(key, methodid,  classid); 
 SubjectTSubjectNObject entry = myhashmap.get(tr.getRequirementid()+"-"+method); 
-System.out.println(tr.getRequirementid());
-System.out.println(method);
+//System.out.println(tr.getRequirementid());
+//System.out.println(method);
 
 if(entry!=null) {
 String	goldfinal= PredictGoldUnionFinal(Integer.parseInt(entry.SubjectT), Integer.parseInt(entry.SubjectN)); 
 
 
-	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
-			+"','" +goldfinal+"','"+entry.SubjectT +"','" +entry.SubjectN+"')";		
-			st.executeUpdate(statement);	
+//	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
+//			+"','" +goldfinal+"','"+entry.SubjectT +"','" +entry.SubjectN+"')";		
+//			st.executeUpdate(statement);	
+			mylist.remove(tr.getRequirementid()+"-"+method); 
 }
 else {
-	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
-			+"','" + "E" +"','"+ "0"  +"','" + "0"+"')";		
-			st.executeUpdate(statement);	
+//	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
+//			+"','" + "E" +"','"+ "0"  +"','" + "0"+"')";		
+//			st.executeUpdate(statement);	
 }
 
 
 }
 
 
+
+
 }
+
+
+for(String s: mylist) {
+	System.out.println(s);
+}
+System.out.println("OVER");
 //
 //
 //
@@ -1831,7 +1841,7 @@ bufferedReader.close();
 
 Hashtable<String,List<String>> RequirementClassHashMapUnionGold=new Hashtable<String,List<String>>(); 
 List<String> ListUnionGold= new ArrayList<String>(); 
-List<String> mylist= new ArrayList<String>(); 
+ mylist= new ArrayList<String>(); 
 ResultSet traces = st.executeQuery("SELECT traces.* from traces "); 
 while(traces.next()){		
 	//THIS IS GOLD 2
@@ -1911,6 +1921,7 @@ if(reqclassValue!=null) {
 
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	static String PredictGoldUnionFinal(int SubjectT, int SubjectN) {
 		String goldUnion=null; 

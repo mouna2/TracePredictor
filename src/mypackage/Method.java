@@ -282,7 +282,28 @@ public class Method {
 				}else {
 						if(!Callee.Callees.isEmpty()) {
 							FinalCallees.addAll(Callee.Callees); 
+							for(Method mycallee:Callee.Callees) {
+								if(!mycallee.Interfaces.isEmpty()) {
+									for(Method inter: mycallee.Interfaces) {
+										if(!inter.Callees.isEmpty()) {
 
+
+											FinalCallees=FinalCallees.AddAll(inter.Callees); 
+
+										}
+									}
+								}
+
+								if(!mycallee.Superclasses.isEmpty()) {
+									for(Method superclass: mycallee.Superclasses) {
+										if(!superclass.Callees.isEmpty()) {
+
+											FinalCallees=FinalCallees.AddAll(superclass.Callees); 
+
+										}
+									}
+								}
+							}
 						}else {
 							FinalCallees.add(Callee); 
 						}
@@ -391,63 +412,86 @@ public class Method {
 		
 		MethodList NewCallers= new MethodList();
 		NewCallers.addAll(Callers);
-		if(!this.Interfaces.isEmpty()) {
-			for(Method inter: this.Interfaces) {
-				if(!inter.Callers.isEmpty()) {
-					inter.CallerInterfaceFlag=true; 
-
-
-					NewCallers=NewCallers.AddAll(inter.Callers); 
-
-				}
-			}
-		}
-
-		if(!this.Superclasses.isEmpty()) {
-			for(Method superclass: this.Superclasses) {
-				if(!superclass.Callers.isEmpty()) {
-					superclass.CallerSuperclassFlag=true; 
-
-					NewCallers=NewCallers.AddAll(superclass.Callers); 
-
-				}
-			}
-		}
-		
-		
 		MethodList FinalCallers = new MethodList();
-		for(Method Caller: NewCallers) {
-			if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("T") 
-					||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
-				FinalCallers.add(Caller); 
-			}
-			else if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
-				if(!Caller.Owner.ID.equals(this.Owner.ID)){
-					FinalCallers.add(Caller); 
-				}else {
-					if(!Caller.Callers.isEmpty()) {
-						FinalCallers.addAll(Caller.Callers); 
+		
+			if(!this.Interfaces.isEmpty()) {
+				for(Method inter: this.Interfaces) {
+					if(!inter.Callers.isEmpty()) {
 
-					}else {
-						FinalCallers.add(Caller); 
+
+						NewCallers=NewCallers.AddAll(inter.Callers); 
 
 					}
-
-//					for(Method CallerOfCaller: Caller.getCallers(requirement)) {
-//						FinalCallers.add(CallerOfCaller);
-//					for(Method CallerOfCaller: Caller.Callers) {
-//						if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("T") 
-//								||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("N")) {
-//							FinalCallers.add(CallerOfCaller); 
-//						}
-//						else if(!CallerOfCaller.Owner.ID.equals(Caller.Owner.ID)
-//								&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("E")){
-//							FinalCallers.add(CallerOfCaller); 
-//						}
-//					}
 				}
 			}
-		}
+
+			if(!this.Superclasses.isEmpty()) {
+				for(Method superclass: this.Superclasses) {
+					if(!superclass.Callers.isEmpty()) {
+
+						NewCallers=NewCallers.AddAll(superclass.Callers); 
+
+					}
+				}
+			}
+			
+			
+			for(Method Caller: NewCallers) {
+				if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("T") 
+						||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
+					FinalCallers.add(Caller); 
+				}
+				else if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
+					if(!Caller.Owner.ID.equals(this.Owner.ID)){
+						FinalCallers.add(Caller); 
+					}else {
+						if(!Caller.Callers.isEmpty()) {
+							FinalCallers.addAll(Caller.Callers); 
+									for(Method mycaller:Caller.Callers) {
+										if(!mycaller.Interfaces.isEmpty()) {
+											for(Method inter: mycaller.Interfaces) {
+												if(!inter.Callers.isEmpty()) {
+		
+		
+													FinalCallers=FinalCallers.AddAll(inter.Callers); 
+		
+												}
+											}
+										}
+		
+										if(!mycaller.Superclasses.isEmpty()) {
+											for(Method superclass: mycaller.Superclasses) {
+												if(!superclass.Callers.isEmpty()) {
+		
+													FinalCallers=FinalCallers.AddAll(superclass.Callers); 
+		
+												}
+											}
+										}
+									}
+
+						}else {
+							FinalCallers.add(Caller); 
+
+						}
+
+//						for(Method CallerOfCaller: Caller.getCallers(requirement)) {
+//							FinalCallers.add(CallerOfCaller);
+//						for(Method CallerOfCaller: Caller.Callers) {
+//							if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("T") 
+//									||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("N")) {
+//								FinalCallers.add(CallerOfCaller); 
+//							}
+//							else if(!CallerOfCaller.Owner.ID.equals(Caller.Owner.ID)
+//									&& AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+CallerOfCaller.ID).prediction.equals("E")){
+//								FinalCallers.add(CallerOfCaller); 
+//							}
+//						}
+					}
+				}
+			}
+		
+
 		
 		
 		FinalCallers=RemoveDuplicates(FinalCallers); 

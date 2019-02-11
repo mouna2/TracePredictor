@@ -1628,10 +1628,7 @@ public class DBDemo3Gantt2 {
 
         }      
 
-//
-//
-//
-//
+
 ///////////////*********************************************************************************************************************************************************************************/	
 ///////////////*********************************************************************************************************************************************************************************/	
 ///////////////*********************************************************************************************************************************************************************************/   
@@ -1678,7 +1675,8 @@ public class DBDemo3Gantt2 {
 //////////////
 
     	
-
+		List<String> TraceList= new ArrayList<String>(); 
+		int c=0; 
     	HashMap<String, SubjectTSubjectNObject> myhashmap= new HashMap<String, SubjectTSubjectNObject>() ; 
 
     	try {
@@ -1688,12 +1686,11 @@ public class DBDemo3Gantt2 {
     		StringBuffer stringBuffer = new StringBuffer();
     		String line;
     		line = bufferedReader.readLine(); 
-
     		while ((line = bufferedReader.readLine()) != null) {
     			String[] splittedline = line.split(","); 
     			stringBuffer.append(line);
     			stringBuffer.append("\n");
-    			  counter = 1; 
+    			   counter = 1; 
     			for(int j=1; j<splittedline.length; j+=2) {
     				SubjectTSubjectNObject SubjectTSubjectNObj = new SubjectTSubjectNObject(); 
     				String methodname2= splittedline[0]; 
@@ -1710,15 +1707,16 @@ public class DBDemo3Gantt2 {
     				SubjectTSubjectNObj.setSubjectN(SubjectN);
     				counter++; 
     				String reqMethod=RequirementID+"-"+methodname2; 
+    				TraceList.add(reqMethod); 
     				myhashmap.put(reqMethod,SubjectTSubjectNObj); 
     			}
     		
     		}
     		fileReader.close();
     		int count=1;
+    		System.out.println(TraceList.size());
 
-
-    		System.out.println(stringBuffer.toString());
+//    		System.out.println(stringBuffer.toString());
     	} catch (IOException e) {
     		e.printStackTrace();
     	}
@@ -1768,8 +1766,8 @@ String classid = mymeths.getString("classid");
 for(String key: RequirementIDNameHashMap.keySet()) {
 tracesmethods tr= new tracesmethods(key, methodid,  classid); 
 SubjectTSubjectNObject entry = myhashmap.get(tr.getRequirementid()+"-"+method); 
-System.out.println(tr.getRequirementid());
-System.out.println(method);
+//System.out.println(tr.getRequirementid());
+//System.out.println(method);
 
 if(entry!=null) {
 String	goldfinal= PredictGoldUnionFinal(Integer.parseInt(entry.SubjectT), Integer.parseInt(entry.SubjectN)); 
@@ -1778,6 +1776,8 @@ String	goldfinal= PredictGoldUnionFinal(Integer.parseInt(entry.SubjectT), Intege
 	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
 			+"','" +goldfinal+"','"+entry.SubjectT +"','" +entry.SubjectN+"')";		
 			st.executeUpdate(statement);	
+			TraceList.remove(tr.getRequirementid()+"-"+method); 
+			c++; 
 }
 else {
 	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
@@ -1791,7 +1791,11 @@ else {
 
 }
 
-
+System.out.println(c);
+for(String entry: TraceList) {
+	System.out.println(entry);
+}
+System.out.println("OVER");
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
@@ -1800,7 +1804,7 @@ else {
 //////////////CREATE TRACES CLASSES TABLE 
 //////////
 
-
+List<String> ClassList = new ArrayList<String>(); 
 FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\GanttFiles\\TracesClassesNEW.txt");
 BufferedReader bufferedReader = new BufferedReader(fileReader);
 HashMap<String,  String> ReqClassHashMap= new HashMap<String,  String> (); 
@@ -1843,6 +1847,7 @@ while((line = bufferedReader.readLine()) != null) {
 	
 
 //    System.out.println(line);
+    ClassList.add(splitted[0]); 
 }   
 
 // Always close files.
@@ -1902,10 +1907,10 @@ for(String keyreq: RequirementIDNameHashMap.keySet()) {
 for(Entry<String, String> entry :RequirementClassHashMap.entrySet()) {
 String myvalue = entry.getValue(); 
 String[] myvalues = myvalue.split("-"); 
-System.out.println(myvalues[1]);
-System.out.println(myvalues[0]);
-System.out.println(myvalues[3]);
-System.out.println(myvalues[2]);
+//System.out.println(myvalues[1]);
+//System.out.println(myvalues[0]);
+//System.out.println(myvalues[3]);
+//System.out.println(myvalues[2]);
 int CountT=0, CountN=0, CountE=0; 
 List<String> list = RequirementClassHashMapUnionGold.get(myvalues[0]+"-"+myvalues[2]); 
 CountTNE count=ComputeProportions(list, CountT, CountN, CountE); 
@@ -1916,6 +1921,7 @@ if(reqclassValue!=null) {
 	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
 			+"','"  +SubjectGeneralization+"','"  +reqclassValue+"')";	
 	st2.executeUpdate(statement8);
+	ClassList.remove(myvalues[3]); 
 }else {
 	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
 			+"','"  +SubjectGeneralization+"','"  +"E"+"')";	
@@ -1924,8 +1930,11 @@ if(reqclassValue!=null) {
 
 }
 
+for(String myclass: ClassList) {
+	System.out.println(myclass);
+}
 
-
+System.out.println("OVER");
 
 
 
