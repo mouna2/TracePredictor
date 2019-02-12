@@ -146,8 +146,16 @@ public class ReplaceConstructorWithInit {
 	            }else {
 	            	  newline=splitted[0]+"."+splitted[1]+"."+splitted[2]; 
 	            }
+	          
+	         
 	          for(int i=3; i<splitted.length; i++) {
-        		  newline=newline+","+splitted[i]; 
+	        	  try {
+	        		  Integer.parseInt(splitted[i]); 
+	        		  newline=newline+","+splitted[i]; 
+		          }
+        		  catch(NumberFormatException e) {
+        			  newline=newline+"."+splitted[i]; 
+        		  }
         	  }
 //	            System.out.println(line);
 	        NewlineList.add(newline); 
@@ -164,8 +172,27 @@ public class ReplaceConstructorWithInit {
             BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\JHotDrawMethodsFormatted.txt")); 
 
             for(String myline: NewlineList) {
+            	String[] splitted= myline.split("\\,");
+            	String[] methodnames = splitted[0].split("\\."); 
+            	int i=0; 
+            	String s=""; 
+            	if(methodnames[methodnames.length-1].equals(methodnames[methodnames.length-2])) {
             	
-                writer.write(myline);
+            			while(i<methodnames.length-1) {
+            				s=s+methodnames[i]+"."; 
+            				i++;
+            			}
+            		
+            		s=s+"-init-";
+            		int j=1; 
+            		while(j<splitted.length) {
+            			s=s+","+splitted[j]; 
+            			j++; 
+            		}
+            	}else {
+            		s=myline; 
+            	}
+                writer.write(s);
                 writer.newLine();
                 System.out.println(myline);
             }

@@ -447,6 +447,8 @@ public class Method {
 					}else {
 						if(!Caller.Callers.isEmpty()) {
 							FinalCallers.addAll(Caller.Callers); 
+							
+							//ADDED NEW CODE TO GET INTERFACES AND SUPERCLASSES OF CALLERS OF CALLERS 
 									for(Method mycaller:Caller.Callers) {
 										if(!mycaller.Interfaces.isEmpty()) {
 											for(Method inter: mycaller.Interfaces) {

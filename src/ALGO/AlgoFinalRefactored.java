@@ -1793,7 +1793,7 @@ public class AlgoFinalRefactored extends JFrame {
 
 		
 		String ProgramName4 = "jhotdraw";
-			frame = new AlgoFinalRefactored(ProgramName4);
+				frame = new AlgoFinalRefactored(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
