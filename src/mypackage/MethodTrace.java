@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import ALGO.AlgoFinalRefactored;
+import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.OwnerClassList;
@@ -138,6 +138,28 @@ public final class MethodTrace {
 			
 			
 			{
+
+		if(this.prediction.trim().equals("E")) {
+			
+		
+			this.prediction=Pred; 
+
+			modified=true; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
+			
+		}
+
+	
+
+		
+		
+	}
+	/************************************************************************************************************************************************/
+	/************************************************************************************************************************************************/
+	public void UpdateCallersCallees(LinkedHashMap<String, LogInfo> LogInfoHashMap)
+			
+			
+			{
 		// TODO Auto-generated method stub
 		List<String> CallerList= new ArrayList<String>(); 
 		List<String> CalleeList= new ArrayList<String>(); 
@@ -198,21 +220,13 @@ public final class MethodTrace {
 		int ClassMethodsSize=this.Method.Owner.methods.size(); 
 		List<String> ClassCallersOwnerClasses= new ArrayList<String>(); 
 		List<String> ClassCalleesOwnerClasses= new ArrayList<String>(); 
-		if(this.prediction.trim().equals("E")) {
-			
 		
-			this.prediction=Pred; 
-
-			modified=true; 
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
-
-		}
 
 		for(Method caller: this.Method.getCallers(Requirement)) {
 			CallerList.add(caller.toString()); 
-			PredictionCallerList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+			PredictionCallerList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 			if(!this.Method.Owner.ID.equals(caller.Owner.ID)) {
-				PredictionOuterCallerList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+				PredictionOuterCallerList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 				
 			}
 			
@@ -220,9 +234,9 @@ public final class MethodTrace {
 		}
 		for(Method callee: this.Method.getCallees(Requirement)) {
 			CalleeList.add(callee.toString()); 
-			PredictionCalleeList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+			PredictionCalleeList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 			if(!this.Method.Owner.ID.equals(callee.Owner.ID)) {
-				PredictionOuterCalleeList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+				PredictionOuterCalleeList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 
 			}
 			
@@ -262,15 +276,15 @@ public final class MethodTrace {
 //			}
 //
 //		}
-		
-		
+		String mypred = AlgoFinal.methodtraces2HashMap.get("2-297").getPrediction(); 
+//		System.out.println("MYYYYYY PRED ========================================="+mypred);
 		for(Method caller: this.Method.Callers) {
 			OriginalCallerList.add(caller.toString()); 
-			OriginalPredictionCallerList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+			OriginalPredictionCallerList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 		}
 		for(Method callee: this.Method.Callees) {
 			OriginalCalleeList.add(callee.toString()); 
-			OriginalPredictionCalleeList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+			OriginalPredictionCalleeList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 
 		}
 		
@@ -315,26 +329,26 @@ public final class MethodTrace {
 		
 		for(Method caller: this.Method.getSuperclassCallers(Requirement)) {
 			SuperclassCallerList.add(caller.toString()); 
-			SuperclassPredictionCallerList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+			SuperclassPredictionCallerList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 
 		}
 		
 		for(Method callee: this.Method.getChildrenCallees(Requirement)) {
 			ChildrenCalleeList.add(callee.toString()); 
-			ChildrenPredictionCalleeList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+			ChildrenPredictionCalleeList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 		}
 	
 		
 		
 		for(Method caller: this.Method.getInterfaceCallers(Requirement)) {
 			InterfaceCallerList.add(caller.toString()); 
-			InterfacePredictionCallerList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+			InterfacePredictionCallerList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 
 		}
 		
 		for(Method callee: this.Method.getImplementationCallees(Requirement)) {
 			ImplementationCalleeList.add(callee.toString()); 
-			ImplementationPredictionCalleeList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
+			ImplementationPredictionCalleeList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 		}
 		
 		
@@ -344,26 +358,26 @@ public final class MethodTrace {
 		
 		for(Method imp: this.Method.Implementations) {
 			ImplementationList.add(imp.toString()); 
-			ImplementationPredictionList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+imp.ID).getPrediction()); 
+			ImplementationPredictionList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+imp.ID).getPrediction()); 
 
 		}
 		
 		for(Method child: this.Method.Children) {
 			ChildrenList.add(child.toString()); 
-			ChildrenPredictionList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+child.ID).getPrediction()); 
+			ChildrenPredictionList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+child.ID).getPrediction()); 
 		}
 	
 		
 		
 		for(Method superclass: this.Method.Superclasses) {
 			InterfaceList.add(superclass.toString()); 
-			InterfacePredictionList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+superclass.ID).getPrediction()); 
+			InterfacePredictionList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+superclass.ID).getPrediction()); 
 
 		}
 		
 		for(Method inter: this.Method.Interfaces) {
 			InterfaceList.add(inter.toString()); 
-			InterfacePredictionList.add(AlgoFinalRefactored.methodtraces2HashMap.get(this.Requirement.ID+"-"+inter.ID).getPrediction()); 
+			InterfacePredictionList.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+inter.ID).getPrediction()); 
 		}
 		
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setClassCalleesOwnerClasses(ClassCalleesOwnerClasses);
@@ -430,7 +444,6 @@ public final class MethodTrace {
 		
 		
 	}
-
 	@Override
 	public String toString() {
 		return "MethodTrace [Method=" + Method.toString() + ", Requirement=" + Requirement + ", gold=" + gold + ", prediction="

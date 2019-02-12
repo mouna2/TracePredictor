@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import ALGO.AlgoFinalRefactored;
+import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.OwnerClassList;
@@ -272,11 +272,11 @@ public class Method {
 		MethodList FinalCallees = new MethodList();
 
 		for(Method Callee: NewCallees) {
-			if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("T") 
-					||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("N")) {
+			if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("T") 
+					||AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("N")) {
 				FinalCallees.add(Callee); 
 			}
-			else if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("E") ) {
+			else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("E") ) {
 				if(!Callee.Owner.ID.equals(this.Owner.ID)){
 					FinalCallees.add(Callee); 
 				}else {
@@ -437,11 +437,11 @@ public class Method {
 			
 			
 			for(Method Caller: NewCallers) {
-				if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("T") 
-						||AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
+				if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("T") 
+						||AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
 					FinalCallers.add(Caller); 
 				}
-				else if(AlgoFinalRefactored.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
+				else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
 					if(!Caller.Owner.ID.equals(this.Owner.ID)){
 						FinalCallers.add(Caller); 
 					}else {

@@ -55,7 +55,7 @@ import mypackage.Method;
 import mypackage.MethodTrace;
 
 
-public class AlgoFinalRefactored extends JFrame {
+public class AlgoFinal extends JFrame {
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -127,7 +127,7 @@ public class AlgoFinalRefactored extends JFrame {
 		CalleeMethodListFinal = calleeMethodListFinal;
 	}
 
-	public AlgoFinalRefactored(String ProgramName) throws Exception {
+	public AlgoFinal(String ProgramName) throws Exception {
 
 	
 //		List<MethodTrace> methodtracesNew = InitializePredictionsHashMap2(methodtraces2);
@@ -330,7 +330,7 @@ public class AlgoFinalRefactored extends JFrame {
 					
 					
 					String reqClass= methodtrace.Requirement.ID+"-"+methodtrace.Method.Owner.ID; 
-					
+					String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 		
 //			if (methodtrace.Method.Owner.DeveloperGold != null) {
 				
@@ -1115,7 +1115,7 @@ public class AlgoFinalRefactored extends JFrame {
 						
 						
 						 //ALL CALLERS 
-						 
+						
 						if (	
 								 methodtrace.Method.getOuterCallers(methodtrace.Requirement).getOwnerClasses(methodtrace.Requirement).AllTs(methodtrace.Requirement)
 								&& !methodtrace.Method.getCallers(methodtrace.Requirement).AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
@@ -1456,7 +1456,18 @@ public class AlgoFinalRefactored extends JFrame {
 //		}
 		
 		
+				for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+					
+						methodtrace.UpdateCallersCallees(LogInfoHashMap);
+					
+					
 	
+				
+					
+					
+	
+					
+					}	
 		System.out.println(ITERATION);
 		System.out.println("FINISJED");
 	
@@ -1782,18 +1793,18 @@ public class AlgoFinalRefactored extends JFrame {
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
 		String ProgramName = "chess";
-		AlgoFinalRefactored frame = new AlgoFinalRefactored(
+		AlgoFinal frame = new AlgoFinal(
 				ProgramName);
 
 		String ProgramName2 = "gantt";
-			 frame = new AlgoFinalRefactored(ProgramName2);
+			 frame = new AlgoFinal(ProgramName2);
 
 		String ProgramName3 = "itrust";
-			 frame = new AlgoFinalRefactored(ProgramName3);
+			 frame = new AlgoFinal(ProgramName3);
 
 		
 		String ProgramName4 = "jhotdraw";
-				frame = new AlgoFinalRefactored(ProgramName4);
+				frame = new AlgoFinal(ProgramName4);
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
