@@ -1120,6 +1120,8 @@ public class AlgoFinal extends JFrame {
 								 methodtrace.Method.getOuterCallers(methodtrace.Requirement).getOwnerClasses(methodtrace.Requirement).AllTs(methodtrace.Requirement)
 								&& !methodtrace.Method.getCallers(methodtrace.Requirement).AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
 								&& DatabaseInput.OwnerTraceHashMap.get(reqClass).equals("T") 
+								&& !methodtrace.Method.getCallees(methodtrace.Requirement).AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+
 //								&& methodtrace.Method.Owner.methods.size()<30
 
 //								&& !methodtrace.Method.Owner.ID.equals("24")
@@ -1135,6 +1137,8 @@ public class AlgoFinal extends JFrame {
 								 methodtrace.Method.getOuterCallees(methodtrace.Requirement).getOwnerClasses(methodtrace.Requirement).AllTs(methodtrace.Requirement)
 								&& !methodtrace.Method.getCallees(methodtrace.Requirement).AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) 
 								&& DatabaseInput.OwnerTraceHashMap.get(reqClass).equals("T") 
+								&& !methodtrace.Method.getCallers(methodtrace.Requirement).AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+
 //								&& methodtrace.Method.Owner.methods.size()<30
 
 //								&& !methodtrace.Method.Owner.ID.equals("24")
